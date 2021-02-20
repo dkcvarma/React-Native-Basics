@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Button,
-  FlatList
-} from 'react-native';
+import { StyleSheet, View, Button, FlatList } from 'react-native';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
@@ -14,6 +9,9 @@ export default function App() {
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = goalTitle => {
+    if (goalTitle.length === 0) {
+      return;
+    }
     setGoals(currentGoals => [
       ...currentGoals,
       { id: Math.random().toString(), value: goalTitle }
