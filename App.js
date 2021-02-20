@@ -14,13 +14,25 @@ export default function App() {
     ]);
   };
 
+  const removeGoalHandler = goalId => {
+    setGoals(currentGoals => {
+      return currentGoals.filter((goal) => goal.id !==  goalId);
+    });
+  }
+
   return (
     <View style={styles.screen}>
       <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={goals}
-        renderItem={itemData => <GoalItem title={itemData.item.value} />}
+        renderItem={itemData => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
       />
     </View>
   );
